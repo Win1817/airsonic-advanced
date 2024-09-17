@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airsonic-advanced
+  namespace: airsonic-advanced
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airsonic-advanced
+  template:
+    metadata:
+      labels:
+        app: airsonic-advanced
+    spec:
+      containers:
+      - name: airsonic-advanced
+        image: lscr.io/linuxserver/airsonic-advanced:latest
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Etc/UTC"
+        - name: CONTEXT_PATH
+          value: ""
+        - name: JAVA_OPTS
+          value: ""
+        ports:
+        - containerPort: 4040
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+        - name: music-volume
+          mountPath: /music
+        - name: playlists-volume
+          mountPath: /playlists
+        - name: podcasts-volume
+          mountPath: /podcasts
+      volumes:
+      - name: config-volume
+        persistentVolumeClaim:
+          claimName: airsonic-config-pvc
+      - name: music-volume
+        persistentVolumeClaim:
+          claimName: airsonic-music-pvc
+      - name: playlists-volume
+        persistentVolumeClaim:
+          claimName: airsonic-playlists-pvc
+      - name: podcasts-volume
+        persistentVolumeClaim:
+          claimName: airsonic-podcasts-pvc
