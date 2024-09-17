@@ -18,8 +18,8 @@ Service to expose the application on a NodePort.
 Start by cloning the repository where your Kubernetes YAML files are stored. If you haven't created a repository, create one, or store the following files locally in a directory of your choice.
 
 ```bash
-git clone https://github.com/Win1817/K3S-Kubernetes-Cluster.git
-cd K3S-Kubernetes-Cluster
+git clone https://github.com/Win1817/airsonic-advanced.git
+cd airsonic-advanced
 ````
 
 2. Apply the Persistent Volume Claims (PVCs)
@@ -60,6 +60,6 @@ You have now deployed Airsonic-Advanced in the airsonic-advanced namespace, usin
 Change storageClassName in the PVCs to match your storage provider.
 Modify the environment variables (PUID, PGID, TZ) to suit your needs.
 
-#Troubleshooting
+# Troubleshooting
 PVC Binding Issues: Ensure the storage class is correctly configured and available.
 Service Access: Check that your firewall and Kubernetes network policies allow traffic to the NodePort (32015).
